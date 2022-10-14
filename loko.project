@@ -1,0 +1,304 @@
+{
+  "name": "prva",
+  "id": "prva",
+  "description": "",
+  "created_on": "30/09/2022, 08:09:04",
+  "last_modify": "13/10/2022, 13:52:24",
+  "graphs": {
+    "main": {
+      "nodes": [
+        {
+          "id": "b6c25426-8728-4f69-93d7-55568e28cd50",
+          "position": {
+            "x": 556.5336808734866,
+            "y": 197.6503994832068
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 156,
+          "height": 88,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "File Reader",
+            "events": null,
+            "description": "### Description\nThe FILE READER component allows the reading of individual files.\n\n### Output\nSetting the **Read Content** parameter to **False**, the output provides the file path in PosixPath format. The component will then need to be connected to other components to read the content, for example *LineReader*.\n\nOn the contrary, setting the **Read Content** parameter to **True**, you can choose whether to read the content in *Binary* format. This format will be selected for reading non-text files.",
+            "inputs": [
+              {
+                "id": "input",
+                "label": "input"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Inputs",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                },
+                {
+                  "name": "value",
+                  "type": "files",
+                  "label": "File",
+                  "fragment": "files",
+                  "validation": {
+                    "required": "Required field"
+                  }
+                },
+                {
+                  "name": "read_content",
+                  "type": "boolean",
+                  "label": "Read content"
+                },
+                {
+                  "name": "binary",
+                  "type": "dynamic",
+                  "label": "Binary",
+                  "dynamicType": {
+                    "true": "boolean"
+                  },
+                  "parent": "read_content"
+                }
+              ],
+              "click": "Send file",
+              "icon": "RiFileList3Fill",
+              "values": {
+                "comment": "",
+                "alias": "",
+                "debug": false,
+                "read_content": false,
+                "value": {
+                  "name": "15.flac",
+                  "path": "data/data/15.flac",
+                  "parent": "data/data",
+                  "isDir": false,
+                  "hidden": false
+                }
+              }
+            },
+            "locked": null
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 556.5336808734866,
+            "y": 197.6503994832068
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "a0320757-055d-47db-9c9a-2f0b5e4a5823",
+          "position": {
+            "x": 834.5338346592483,
+            "y": 220.47314289071576
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Music Search",
+            "events": null,
+            "description": "",
+            "inputs": [
+              {
+                "id": "file",
+                "label": "Audio",
+                "service": "upload_file",
+                "to": "output"
+              },
+              {
+                "id": "info",
+                "label": "Info",
+                "service": "wikipedia_info",
+                "to": "output"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "Output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Custom",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                }
+              ],
+              "click": null,
+              "icon": "RiMusic2Fill",
+              "values": {
+                "debug": true
+              }
+            }
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 834.5338346592483,
+            "y": 220.47314289071576
+          },
+          "__class__": "Node"
+        },
+        {
+          "id": "2d377f23-13f0-431f-a03c-866f30d3ba12",
+          "position": {
+            "x": 1121.8899479765219,
+            "y": 214.01570214201297
+          },
+          "type": "custom",
+          "dragHandle": "#nodeHandle",
+          "sourcePosition": "right",
+          "targetPosition": "left",
+          "width": 150,
+          "height": 56,
+          "selected": false,
+          "dragging": false,
+          "data": {
+            "name": "Music Search",
+            "events": null,
+            "description": "",
+            "inputs": [
+              {
+                "id": "file",
+                "label": "Audio",
+                "service": "upload_file",
+                "to": "output"
+              },
+              {
+                "id": "info",
+                "label": "Info",
+                "service": "wikipedia_info",
+                "to": "output"
+              }
+            ],
+            "outputs": [
+              {
+                "id": "output",
+                "label": "Output"
+              }
+            ],
+            "configured": true,
+            "options": {
+              "group": "Custom",
+              "args": [
+                {
+                  "name": "comment",
+                  "type": "area",
+                  "label": "Node comment",
+                  "helper": "Use it to explain the usage of this node"
+                },
+                {
+                  "name": "alias",
+                  "type": "text",
+                  "label": "Name",
+                  "helper": "Use this name as an alias"
+                },
+                {
+                  "name": "debug",
+                  "type": "boolean",
+                  "label": "Debug to Console",
+                  "divider": true
+                }
+              ],
+              "click": null,
+              "icon": "RiMusic2Fill",
+              "values": {
+                "debug": true
+              }
+            }
+          },
+          "selectable": true,
+          "draggable": true,
+          "positionAbsolute": {
+            "x": 1121.8899479765219,
+            "y": 214.01570214201297
+          },
+          "__class__": "Node"
+        }
+      ],
+      "edges": [
+        {
+          "id": "reactflow__edge-b6c25426-8728-4f69-93d7-55568e28cd50output-a0320757-055d-47db-9c9a-2f0b5e4a5823file",
+          "source": "b6c25426-8728-4f69-93d7-55568e28cd50",
+          "sourceHandle": "output",
+          "target": "a0320757-055d-47db-9c9a-2f0b5e4a5823",
+          "targetHandle": "file",
+          "data": {
+            "startColor": "#F8637A",
+            "stopColor": "#888"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        },
+        {
+          "id": "reactflow__edge-a0320757-055d-47db-9c9a-2f0b5e4a5823output-2d377f23-13f0-431f-a03c-866f30d3ba12info",
+          "source": "a0320757-055d-47db-9c9a-2f0b5e4a5823",
+          "sourceHandle": "output",
+          "target": "2d377f23-13f0-431f-a03c-866f30d3ba12",
+          "targetHandle": "info",
+          "data": {
+            "startColor": "#888",
+            "stopColor": "#888"
+          },
+          "selected": false,
+          "dragging": false,
+          "__class__": "Edge"
+        }
+      ],
+      "__class__": "Graph"
+    }
+  },
+  "open": [
+    "main"
+  ],
+  "active": "main",
+  "version": "1.0.0",
+  "__class__": "Project"
+}

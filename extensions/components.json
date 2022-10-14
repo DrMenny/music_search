@@ -1,0 +1,34 @@
+[
+ {
+  "name": "Music Search",
+  "description": "",
+  "group": "Custom",
+  "icon": "RiMusic2Fill",
+  "click": null,
+  "configured": true,
+  "inputs": [
+   {
+    "id": "file",
+    "label": "Audio",
+    "service": "upload_file",
+    "to": "output"
+   },
+   {
+    "id": "info",
+    "label": "Info",
+    "service": "wikipedia_info",
+    "to": "output"
+   }
+  ],
+  "outputs": [
+   {
+    "id": "output",
+    "label": "Output"
+   }
+  ],
+  "options": {
+   "values": {},
+   "args": []
+  }
+ }
+]

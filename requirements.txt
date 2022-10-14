@@ -1,0 +1,7 @@
+loko-extensions
+requests
+sanic == 22.6.2
+sanic-cors
+sanic-openapi
+ShazamAPI
+wikipedia
