@@ -2,7 +2,13 @@ from wikipedia import wikipedia
 
 #print(wikipedia.search('Björk'))
 
-print(wikipedia.summary('Debut (Björk album)', sentences=10))
+author = 'Genesis'
+title = 'Broadway Melody Of 1974'
+
+s = author + '' + title
+
+print(wikipedia.summary(s, ))
+wikipedia.summary(s,  sentences=99)
 
 #def getsummary(author, title):
 #    s = author + ' ' + title

@@ -40,11 +40,11 @@ async def f(value, args):
         summary = None
         while (pages and not found):
             try:
-                summary = wikipedia.summary(pages.pop(0))
+                #summary = wikipedia.summary(pages.pop(0), sentences=50000)
+                summary = wikipedia.page(pages.pop(0)).content
                 logger.debug(f'SUMMARY: {summary}')
-                if (author.lower() in summary.lower()):
+                if author.lower() in summary.lower() and (title.lower() in summary.lower()): #or '"' + title.lower() in summary.lower()):
                     found = True
-                    logger.debug(f'SUM: {summary}')
             except Exception as e:
                 logger.debug(f'ERROR: {e}')
         return summary if found else 'Not found'
