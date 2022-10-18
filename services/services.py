@@ -1,6 +1,7 @@
 # using Sanic
 import json
 import traceback
+
 import sanic
 import re
 from sanic import Sanic, Blueprint
@@ -40,20 +41,24 @@ async def f(value, args):
         summary = None
         while (pages and not found):
             try:
-                #summary = wikipedia.summary(pages.pop(0), sentences=50000)
-                summary = wikipedia.page(pages.pop(0)).content
-                logger.debug(f'SUMMARY: {summary}')
-                if author.lower() in summary.lower() and (title.lower() in summary.lower()): #or '"' + title.lower() in summary.lower()):
+                summary = wikipedia.page(pages.pop(0))
+                #cont = summary.content
+                cont = summary.html()
+                logger.debug(f'TITLE: {summary.title}')
+                #logger.debug(f'SUMMARY: {summary.content}')
+                if author.lower() in cont.lower() and title.lower() in cont.lower():
                     found = True
+                    logger.debug(f'SUMMARY: {summary.url}')
+                    #logger.debug(f'SUMMARY: {summary.content}')
             except Exception as e:
                 logger.debug(f'ERROR: {e}')
-        return summary if found else 'Not found'
+        return summary.content if found else 'Not found'
 
     logger.debug(f'ARGS: {args}')
     logger.debug(f'JSON: {value}')
     title = value.get('title')
     author = value.get('author')
-    logger.debug(f'author: {author} title: {title}')
+    #logger.debug(f'author: {author} title: {title}')
     return sanic.json(getsummary(author, title))
 
 @bp.post('/upload_file')
@@ -63,10 +68,14 @@ async def f2(file, args):
     logger.debug(f'JSON: {file[0].name}')
     shazam = Shazam(file[0].body)
     recognize_generator = shazam.recognizeSong()
+    logger.debug(type(recognize_generator))
     res = next(recognize_generator)  # current offset & shazam response to recognize requests
-    KeysMapping = dict(subtitle='author', title='title')
-    logger.debug(f'RESP: {res}')
-    res = {v: res[1]['track'][k] for k, v in KeysMapping.items()}
+    #logger.debug(f'RESP: {res}')
+    keysmapping = dict(subtitle='author', title='title')
+    if 'track' in res[1]:
+        res = {v: res[1]['track'][k] for k, v in keysmapping.items()}
+    else:
+        res = dict(msg="Unable to find a match")
     return sanic.json(res)
 
 @app.exception(Exception)

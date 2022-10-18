@@ -2,13 +2,15 @@ from wikipedia import wikipedia
 
 #print(wikipedia.search('Björk'))
 
+print(wikipedia.page('Leviathan (Mastodon album)').html())
+
 author = 'Genesis'
 title = 'Broadway Melody Of 1974'
 
 s = author + '' + title
 
-print(wikipedia.summary(s, ))
-wikipedia.summary(s,  sentences=99)
+#print(wikipedia.summary(s, ))
+#wikipedia.summary(s,  sentences=99)
 
 #def getsummary(author, title):
 #    s = author + ' ' + title
