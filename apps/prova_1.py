@@ -1,8 +1,14 @@
 from ShazamAPI import Shazam
 
-mp3_file_content_to_recognize = open('/home/menny/Music/Aphex Twin/Drukqs/Drukqs Disc One/01 - Jynweythek Ylow.flac', 'rb').read()
+url = 'https://en.wikipedia.org/wiki/USA_björk'
+author = 'Björk'
 
-shazam = Shazam(mp3_file_content_to_recognize)
-recognize_generator = shazam.recognizeSong()
-res = next(recognize_generator) # current offset & shazam response to recognize requests
-print(res)
+print(url)
+print(author)
+
+author = author.replace(" ", "_")
+
+if author.lower() in url.lower():
+    print('fuck yeah!')
+else:
+    print('none')

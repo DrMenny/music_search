@@ -1,7 +1,6 @@
 # using Sanic
-import json
+# import json
 import traceback
-
 import sanic
 import re
 from sanic import Sanic, Blueprint
@@ -12,6 +11,8 @@ from utils.logger_utils import stream_logger
 from ShazamAPI import Shazam
 from wikipedia import wikipedia
 from sanic_openapi.openapi2 import doc
+from urllib.parse import unquote
+from bs4 import BeautifulSoup
 
 logger = stream_logger(__name__)
 
@@ -31,10 +32,9 @@ app.config["API_TITLE"] = name
 @extract_value_args()
 async def f(value, args):
     def getsummary(author, title):
-        title = re.sub('\(.+\)', '', title).strip()
-        logger.debug(f'TITLE: {title}')
+        #logger.debug(f'TITLE: {title}')
         s = author + ' ' + title
-        logger.debug(f's: {s}')
+        #logger.debug(f's: {s}')
         pages = wikipedia.search(s)
         logger.debug(f'RESP: {pages}')
         found = False
@@ -42,33 +42,51 @@ async def f(value, args):
         while (pages and not found):
             try:
                 summary = wikipedia.page(pages.pop(0))
-                #cont = summary.content
                 cont = summary.html()
                 logger.debug(f'TITLE: {summary.title}')
-                #logger.debug(f'SUMMARY: {summary.content}')
-                if author.lower() in cont.lower() and title.lower() in cont.lower():
-                    found = True
-                    logger.debug(f'SUMMARY: {summary.url}')
-                    #logger.debug(f'SUMMARY: {summary.content}')
+                #logger.debug(f'PAGES: {cont}')
+                music = 'studio album'
+                single = 'single'
+                if music.lower() in cont.lower() or single.lower() in cont.lower():
+                    logger.debug('Studio Album or Single has found')
+
+                    if author.lower() in cont.lower() and title.lower() in cont.lower():
+                        author_1 = author.replace(" ", "_")
+                        title_1 = title.replace(" ", "_")
+                        logger.debug(f'AUTHOR: {author_1}')
+                        logger.debug(f'SONG: {title_1}')
+                        url_1 = unquote(summary.url)
+                        logger.debug(f'URL: {url_1}')
+                        if author_1.lower() in url_1.lower() or title_1.lower() in url_1.lower():
+                            found = True
+                            logger.debug('ok')
+                        else:
+                            logger.debug('none')
+                    else:
+                        logger.debug('none')
+                else:
+                    logger.debug('No Studio Album or Single found')
             except Exception as e:
                 logger.debug(f'ERROR: {e}')
         return summary.content if found else 'Not found'
 
-    logger.debug(f'ARGS: {args}')
-    logger.debug(f'JSON: {value}')
+    #logger.debug(f'ARGS: {args}')
+    logger.debug(f'VALUES: {value}')
     title = value.get('title')
     author = value.get('author')
-    #logger.debug(f'author: {author} title: {title}')
+    title = re.sub('\(.+\)', '', title).strip()
+    logger.debug(f'author: {author} title: {title}')
     return sanic.json(getsummary(author, title))
 
 @bp.post('/upload_file')
 @extract_value_args(file=True)
 async def f2(file, args):
+    #logger.debug(f'JSON: {file[0]}')
     logger.debug(f'ARGS: {args}')
     logger.debug(f'JSON: {file[0].name}')
     shazam = Shazam(file[0].body)
     recognize_generator = shazam.recognizeSong()
-    logger.debug(type(recognize_generator))
+    #logger.debug(type(recognize_generator))
     res = next(recognize_generator)  # current offset & shazam response to recognize requests
     #logger.debug(f'RESP: {res}')
     keysmapping = dict(subtitle='author', title='title')
