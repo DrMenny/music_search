@@ -3,7 +3,7 @@
   "id": "music_search",
   "description": "",
   "created_on": "30/09/2022, 08:09:04",
-  "last_modify": "08/03/2023, 10:07:22",
+  "last_modify": "08/03/2023, 11:30:59",
   "graphs": {
     "main": {
       "nodes": [
@@ -425,7 +425,8 @@
               "click": null,
               "icon": "RiMusic2Fill",
               "values": {}
-            }
+            },
+            "locked": null
           },
           "selectable": true,
           "draggable": true,

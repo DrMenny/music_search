@@ -2,7 +2,7 @@
 
 This is the Music Search, the loko extension of your music.
 
-<p align="center"><img src="img.png" width="80%" /></p>
+<p align="center"><img src="" width="80%" /></p>
 
 To use it is really simple! 
 
