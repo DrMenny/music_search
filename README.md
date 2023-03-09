@@ -2,8 +2,6 @@
 
 This is the Music Search, the loko extension of your music.
 
-<p align="center"><img src="" width="80%" /></p>
-
 To use it is really simple! 
 
 You can load a file in mp3, flac, etc of your music, of course there is a song that 
